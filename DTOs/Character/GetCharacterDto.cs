@@ -12,6 +12,7 @@ namespace webapi_project.DTOs.Character
         public uint Bounty { get; set; }
         public Crew PirateCrew { get; set; }
         public string DevilFruit { get; set; }
+        public string ImageUrl { get; set; }
 
     }
 }

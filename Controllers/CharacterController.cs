@@ -43,6 +43,13 @@ namespace webapi_project.Controllers
             return Ok(newCharacter);
         }
 
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<GetCharacterDto>>> PutCharacter(UpdateCharacterDto character)
+        {
+            var updatedCharacter = await _characterService.UpdateCharacter(character);
+            return Ok(updatedCharacter);
+        }
+
 
     }
 }

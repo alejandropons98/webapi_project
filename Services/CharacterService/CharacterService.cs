@@ -21,7 +21,16 @@ namespace webapi_project.Services.CharacterService
         public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter)
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
-            characters.Add(_mapper.Map<Character>(newCharacter));
+            Character character = _mapper.Map<Character>(newCharacter);
+            if (characters.Count == 0)
+            {
+                character.Id = 1;
+            }
+            else
+            {
+                character.Id = characters.Max(c => c.Id) + 1;
+            }
+            characters.Add(character);
             serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
             return serviceResponse;
         }
@@ -35,6 +44,26 @@ namespace webapi_project.Services.CharacterService
         {
             var serviceResponse = new ServiceResponse<GetCharacterDto>();
             serviceResponse.Data = _mapper.Map<GetCharacterDto>(characters.FirstOrDefault(c => c.Id == id));
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<GetCharacterDto>> UpdateCharacter(UpdateCharacterDto updatedCharacter)
+        {
+            var serviceResponse = new ServiceResponse<GetCharacterDto>();
+            try{
+            var character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id);
+            character.Name = updatedCharacter.Name;
+            character.Bounty = updatedCharacter.Bounty;
+            character.PirateCrew = updatedCharacter.PirateCrew;
+            character.DevilFruit = updatedCharacter.DevilFruit;
+            character.ImageUrl = updatedCharacter.ImageUrl;
+
+            serviceResponse.Data = _mapper.Map<GetCharacterDto>(character);
+            }
+            catch(Exception ex){
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
             return serviceResponse;
         }
     }
