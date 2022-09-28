@@ -52,13 +52,24 @@ namespace webapi_project.Services.CharacterService
             var serviceResponse = new ServiceResponse<GetCharacterDto>();
             try{
             var character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id);
-            character.Name = updatedCharacter.Name;
-            character.Bounty = updatedCharacter.Bounty;
-            character.PirateCrew = updatedCharacter.PirateCrew;
-            character.DevilFruit = updatedCharacter.DevilFruit;
-            character.ImageUrl = updatedCharacter.ImageUrl;
+            _mapper.Map(updatedCharacter, character);
 
             serviceResponse.Data = _mapper.Map<GetCharacterDto>(character);
+            }
+            catch(Exception ex){
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<List<GetCharacterDto>>> DeleteCharacter(int id)
+        {
+            var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
+            try{
+            Character character = characters.First(c => c.Id == id);
+            characters.Remove(character);
+            serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
             }
             catch(Exception ex){
                 serviceResponse.Success = false;

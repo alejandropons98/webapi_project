@@ -13,6 +13,7 @@ namespace webapi_project
         {
             CreateMap<Character, GetCharacterDto>();
             CreateMap<AddCharacterDto, Character>();
+            CreateMap<UpdateCharacterDto, Character>();
         }
     }
 }

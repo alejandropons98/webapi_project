@@ -47,7 +47,23 @@ namespace webapi_project.Controllers
         public async Task<ActionResult<ServiceResponse<GetCharacterDto>>> PutCharacter(UpdateCharacterDto character)
         {
             var updatedCharacter = await _characterService.UpdateCharacter(character);
+           if(updatedCharacter.Data == null)
+           {
+                updatedCharacter.Message = "Character not found";
+               return NotFound(updatedCharacter);
+           }
             return Ok(updatedCharacter);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> DeleteCharacter(int id)
+        {
+            var response = await _characterService.DeleteCharacter(id);
+            if(response.Data == null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
 
 
