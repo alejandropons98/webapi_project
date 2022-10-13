@@ -1,4 +1,5 @@
 global using webapi_project.Models;
+using webapi_project.Data;
 using webapi_project.Services.CharacterService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ICharacterService, CharacterService>();
+builder.Services.AddNpgsql<DataContext>(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 var app = builder.Build();
 
