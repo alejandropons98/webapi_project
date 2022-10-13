@@ -29,9 +29,11 @@ namespace webapi_project.Controllers
         public async Task<ActionResult<ServiceResponse<GetCharacterDto>>> GetCharacter(int id)
         {
             var character = await _characterService.GetCharacterById(id);
-            if (character == null)
+            if (character.Data == null)
             {
-                return NotFound();
+                character.Success = false;
+                character.Message = "Character not found :(";
+                return NotFound(character);
             }
             return Ok(character);
         }
