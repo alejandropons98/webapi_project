@@ -4,6 +4,14 @@ using webapi_project.Services.CharacterService;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:5173");
+    });
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -16,14 +24,12 @@ builder.Services.AddNpgsql<DataContext>(builder.Configuration.GetConnectionStrin
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
