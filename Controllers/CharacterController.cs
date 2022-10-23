@@ -26,6 +26,7 @@ namespace webapi_project.Controllers
             return Ok(await _characterService.GetAllCharacters());
         }
 
+        // [EnableCors("CorsPolicy")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<GetCharacterDto>>> GetCharacter(int id)
         {

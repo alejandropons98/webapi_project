@@ -6,9 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy", builder =>
+    options.AddDefaultPolicy(builder =>
     {
-        builder.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:5173");
+        builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
     });
 });
 
@@ -29,7 +29,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-app.UseCors("CorsPolicy");
+app.UseCors();
 
 app.UseAuthorization();
 
