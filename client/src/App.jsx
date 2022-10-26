@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import CharacterCard from './components/CharacterCard';
 import CharacterCardGrid from './components/CharacterCardGrid';
 import NavBar from './components/NavBar';
+import AddCharacterForm from './components/AddCharacterForm';
 
 function App() {
   const [character, setCharacter] = useState('');
@@ -46,6 +47,7 @@ function App() {
   return (getCharacters(),
     <>
     <NavBar />
+    <AddCharacterForm />
      <CharacterCardGrid characters={characters} /> 
     </>
     );
