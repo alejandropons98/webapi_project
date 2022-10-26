@@ -10,7 +10,7 @@ function CharacterCardGrid(props) {
     return (
         <Row >
             {characters.map((character) => (
-                <Col key={character.name}>
+                <Col key={character.name} className='m-3'>
                     <CharacterCard
                         name={character.name}
                         pirateCrew={character.pirateCrew}
