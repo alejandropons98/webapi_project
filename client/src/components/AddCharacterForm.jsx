@@ -5,7 +5,9 @@ import Col from 'react-bootstrap/Col';
 
 function AddCharacterForm() {
   return (
-    <Form>
+    <Form style={{width: '50vw', marginLeft: 'auto', marginRight: 'auto'}} className='ml'>
+        <br />
+        <h2>Add your own!</h2>
         <Row>
             <Col className='m-2'>
       <Form.Group className="mb-3" controlId="formName">
@@ -23,7 +25,7 @@ function AddCharacterForm() {
         <Row>
             <Col className='m-2'>
       <Form.Select aria-label="crew">
-      <option>Select pirate crew</option>
+      <option>Select Pirate Crew</option>
       <option value="0">Strawhats</option>
       <option value="1">Heart</option>
       <option value="2">Big Mom</option>
@@ -52,7 +54,7 @@ function AddCharacterForm() {
       </Form.Group>
         </Col>
         </Row>
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" className='mb-4'>
         Submit Character
       </Button>
     </Form>

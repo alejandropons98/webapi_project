@@ -6,6 +6,7 @@ import CharacterCard from './components/CharacterCard';
 import CharacterCardGrid from './components/CharacterCardGrid';
 import NavBar from './components/NavBar';
 import AddCharacterForm from './components/AddCharacterForm';
+import CharacterCarousel from './components/CharacterCarousel';
 
 function App() {
   const [character, setCharacter] = useState('');
@@ -48,7 +49,8 @@ function App() {
     <>
     <NavBar />
     <AddCharacterForm />
-     <CharacterCardGrid characters={characters} /> 
+    <CharacterCarousel characters={characters}/>
+     {/* <CharacterCardGrid characters={characters} />  */}
     </>
     );
 }

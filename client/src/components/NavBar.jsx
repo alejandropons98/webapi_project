@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <>
       <Navbar bg="dark" variant="dark">
-        <Container>
+        <Container >
           <Navbar.Brand href="#home">
             <img
               alt=""
